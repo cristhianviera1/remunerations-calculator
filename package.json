@@ -1,0 +1,21 @@
+{
+  "name": "remunerations-calculator",
+  "version": "0.0.1",
+  "description": "Calculate the remuneration of employees based on their worked time according to the day and hours",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^14.14.37",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.5",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.3"
+  }
+}
