@@ -4,6 +4,10 @@
 
 Calculate the remuneration of employees based on their worked time according to the day and hours
 
+## About
+
+The present project uses a layered model as architecture, which allows us in this small application to keep separated the logic of the persistence models and controllers. Helping us to have data control in each layer and ensure the integrity of each process.
+
 ## Getting Started
 
 1. Install dependencies `yarn | npm install`
