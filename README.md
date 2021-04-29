@@ -6,9 +6,9 @@ Calculate the remuneration of employees based on their worked time according to 
 
 ## Getting Started
 
-1.- Install dependencies `yarn | npm install`
-2.- Compile project `yarn build | npm run build`
-3.- Run project `yarn start | npm run start`
+1. Install dependencies `yarn | npm install`
+2. Compile project `yarn build | npm run build`
+3. Run project `yarn start | npm run start`
 
 That is all! :+1:
 
@@ -23,9 +23,9 @@ Days Format:
 * SA: Saturday
 * SU: Sunday
 
-Hours Format: _00:00-23:59_
+Hours Format: **00:00-23:59**
 
-To add more exercises add them to the "employees-data.txt" file respecting the specified format, otherwise you will get an exception
+To add more exercises add them to the **employees-data.txt** file respecting the specified format, otherwise you will get an exception
 
 ## Examples
 
