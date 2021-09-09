@@ -1,24 +1,50 @@
 import * as fs from 'fs';
-import { calculateAmountToPay } from './Controllers/CalculateAmountToPay';
-import { extractInfo, parseDays, validateInputFormat } from './Controllers/ExtractInputData';
-(()=>{
-    try{
-        const filePath = `${__dirname}/../employees-data.txt`;
+import CalculateAmountToPay from "./Remunerations/Application/CalculateAmountToPay/CalculateAmountToPay";
+import JsonRemunerationRepository from "./Remunerations/Infrastructure/JsonRemunerationRepository";
+import {extractArgs} from "./Utils/ExtractArgsFromCli";
+import {extractInfo, validateInputFormat} from "./Utils/ExtractInputData";
+
+(() => {
+    try {
+        const {path, row, name} = extractArgs();
+        const filePath = path ? path : `${__dirname}/../employees-data.txt`;
+
         if (!fs.existsSync(filePath)) {
-            throw new Error("The employees-data.txt was not found, please create it.")            
+            return console.error("The file .txt was not found, please create it or check the file path");
         }
-        const inputFile = fs.readFileSync(filePath,'utf8');
+        const repository = new JsonRemunerationRepository();
+        const calculateAmountToPay = new CalculateAmountToPay(repository);
+        const inputFile = fs.readFileSync(filePath, 'utf8');
         const employeesData = inputFile.split('\n');
-        employeesData.map((inputRow:any, index)=>{
-            if(!validateInputFormat(inputRow)){
-                return console.error(`Row ${index+1} is invalid, please read the Readme file to check the right format`)
+
+        const processRow = (inputRow: any, index: number) => {
+            if (!validateInputFormat(inputRow)) {
+                return console.error(`Row ${index} is invalid, please read the Readme file to check the right format`)
             }
-            const employeeInfo = extractInfo(inputRow);
-            const parsedDays = parseDays(employeeInfo.workedTime);
-            let amountToPay = calculateAmountToPay(parsedDays);
-            console.log(`The amount to pay to ${employeeInfo.name} is: $${amountToPay} USD`);
-        })
-    }catch(err){
+            const employee = extractInfo(inputRow);
+            let amountToPay = calculateAmountToPay.run(employee.workedTime);
+            console.log(`The amount to pay to ${employee.name} is: $${amountToPay} USD`);
+        }
+
+        const isValidIndex = (index: number): void => {
+            if (index == -1 || employeesData[index] === undefined) {
+                throw new Error(`Index of specified Employee was not found`);
+            }
+        }
+
+        if (name) {
+            const indexOfName = employeesData.findIndex((employee: string) => employee.includes(name));
+            isValidIndex(indexOfName);
+            return processRow(employeesData[indexOfName], indexOfName);
+        }
+
+        if (row) {
+            isValidIndex(row);
+            return processRow(employeesData[row], row);
+        }
+        return employeesData.map((inputRow: any, index) => processRow(inputRow, index));
+
+    } catch (err) {
         console.error(err.message);
     }
 })();

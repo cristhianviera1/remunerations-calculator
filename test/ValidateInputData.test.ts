@@ -1,6 +1,6 @@
-import {extractInfo, parseDays} from '../src/Controllers/ExtractInputData';
-import Day from '../src/Models/Time/ValueObjects/Day';
-import Hour from '../src/Models/Time/ValueObjects/Hour';
+import {extractInfo, parseDays} from '../src/Remunerations/Application/ExtractInputData';
+import Day from '../src/Remunerations/Domain/ValueObject/Day';
+import Hour from '../src/Remunerations/Domain/ValueObject/Hour';
 import TimeWorked from '../src/Models/TimeWorked';
 
 describe("Test to validate inputs string", () => {
