@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import {extractArgs} from './Utils/ExtractArgsFromCli';
 import {isValidIndex, processRow} from './Utils/ProcessInputRow';
+import InvalidArgumentError from './Shared/Domain/InvalidArgumentError';
 
 (() => {
     try {
@@ -22,7 +23,11 @@ import {isValidIndex, processRow} from './Utils/ProcessInputRow';
             processRow(employeesData[row], row);
         }
         employeesData.map((inputRow: string, index) => processRow(inputRow, index));
-    } catch (err) {
-        console.error(err.message);
+    } catch (err: unknown) {
+        if(err instanceof InvalidArgumentError){
+            console.error(err.message);
+        }else{
+            console.log(err);
+        }
     }
 })();
