@@ -1,8 +1,7 @@
-import WorkedTime from "../../../Shared/Domain/ValueObject/WorkedTime";
-import Hour from "../../../Shared/Domain/ValueObject/Hour";
-import Remuneration from "../../Domain/Remuneration";
-import RemunerationRepository from "../../Domain/RemunerationRepository";
-import RemunerationsNotFound from "../../Domain/RemunerationsNotFound";
+import WorkedTime from '../../../Shared/Domain/ValueObject/WorkedTime';
+import Hour from '../../../Shared/Domain/ValueObject/Hour';
+import Remuneration from '../../Domain/Remuneration';
+import RemunerationRepository from '../../Domain/RemunerationRepository';
 
 export default class CalculateAmountToPay {
     constructor(
@@ -10,24 +9,22 @@ export default class CalculateAmountToPay {
     ) {
     }
 
-    public run(timeWorked: WorkedTime[]) {
-        return timeWorked.reduce((amountToPay, timeRecord) => {
-            let amountsByDay = this.remunerationRepository.fetchRemunerationsByDay(timeRecord.day);
-            if (amountsByDay == null) {
-                throw new RemunerationsNotFound(timeRecord.day.value);
-            }
-            amountToPay += this.remunerationsByTime(amountsByDay, timeRecord.startAt, timeRecord.endAt)
+    public run(timeWorked: WorkedTime[]):number {
+        return timeWorked.reduce((amountToPay, {day, endAt, startAt}) => {
+            const amountsByDay = this.remunerationRepository.fetchRemunerationsByDay(day);
+            amountToPay += this.remunerationsByTime(amountsByDay, startAt, endAt)
             return amountToPay;
         }, 0);
     }
 
     private remunerationsByTime(timeWorked: Remuneration[], startAt: Hour, endAt: Hour): number {
-        return timeWorked.reduce((amountToPay, remuneration) => {
+        return timeWorked.reduce((amountToPay, {
+            amount: remunerationAmount,
+            endAt: remunerationEnd,
+            startAt: remunerationStart
+        }) => {
             const startHour = startAt.hour;
             const endHour = endAt.hour;
-            const remunerationStart = remuneration.startAt;
-            const remunerationEnd = remuneration.endAt;
-            const remunerationAmount = remuneration.amount;
             if (
                 startHour < remunerationEnd &&
                 endHour > remunerationEnd

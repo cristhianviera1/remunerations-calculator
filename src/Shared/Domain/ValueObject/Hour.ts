@@ -1,10 +1,12 @@
+import InvalidArgumentError from '../InvalidArgumentError';
+
 export default class Hour {
     private readonly value: string;
     private readonly hourWithMinutes: number;
 
     constructor(value: string) {
         if (!hourPattern.test(value)) {
-            throw new Error(`The ${value} is invalid hour, please use specified format in Readme file.`)
+            throw new InvalidArgumentError(`The ${value} is invalid hour, please use specified format in Readme file.`)
         }
         this.value = Hour.parseIfItsMidnightHour(value);
         this.hourWithMinutes = Hour.extractHourWithMinutes(this.value);
@@ -15,8 +17,8 @@ export default class Hour {
     }
 
     private static extractHourWithMinutes(value: string): number {
-        const hourWithMinutes = value.split(":");
-        return Number(`${hourWithMinutes[0]}${hourWithMinutes[1]}`);
+        const hourWithMinutes = value.replace(':','');
+        return Number(hourWithMinutes);
     }
 
     public get hour():number {
@@ -25,4 +27,4 @@ export default class Hour {
 
 
 }
-const hourPattern = /([01]\d|2[0-3]):([0-5]\d)/;
+const hourPattern = /^([01]\d|2[0-3]):([0-5]\d)$/;

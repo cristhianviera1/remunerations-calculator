@@ -1,26 +1,25 @@
-import Day from "./Day";
-import Hour from "./Hour";
+import Day from './Day';
+import PeriodOfTime from './PeriodOfTime';
+import Hour from './Hour';
 
 export default class WorkedTime {
     private readonly _day: Day;
-    private readonly _startAt: Hour;
-    private readonly _endAt: Hour;
+    private readonly _periodOfTime: PeriodOfTime;
 
-    constructor(day: Day, startAt: Hour, endAt: Hour) {
+    constructor(day: Day, periodOfTime: PeriodOfTime) {
         this._day = day;
-        this._startAt = startAt;
-        this._endAt = endAt;
+        this._periodOfTime = periodOfTime;
     }
 
-    public get day() {
+    public get day(): Day {
         return this._day;
     }
 
-    public get startAt() {
-        return this._startAt;
+    public get startAt(): Hour {
+        return this._periodOfTime.startAt;
     }
 
-    public get endAt() {
-        return this._endAt;
+    public get endAt(): Hour {
+        return this._periodOfTime.endAt;
     }
 }

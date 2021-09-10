@@ -1,12 +1,13 @@
 {
   "name": "remunerations-calculator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Calculate the remuneration of employees based on their worked time according to the day and hours",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "lint": "eslint . --ext .ts"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "@typescript-eslint/parser": "^4.31.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.24.2",
     "jest": "^26.6.3",
     "ts-jest": "^26.5.5",

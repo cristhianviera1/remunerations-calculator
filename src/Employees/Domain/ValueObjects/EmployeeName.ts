@@ -1,5 +1,5 @@
-import {StringValueObject} from "../../../Shared/Domain/ValueObject/StringValueObject";
-import InvalidArgumentError from "../../../Shared/Domain/InvalidArgumentError";
+import {StringValueObject} from '../../../Shared/Domain/ValueObject/StringValueObject';
+import InvalidArgumentError from '../../../Shared/Domain/InvalidArgumentError';
 
 export default class EmployeeName extends StringValueObject{
     constructor(value:string) {

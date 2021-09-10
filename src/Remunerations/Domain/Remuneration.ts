@@ -1,7 +1,7 @@
-import Amount from "../../Shared/Domain/ValueObject/Amount";
-import PeriodOfTime from "../../Shared/Domain/ValueObject/PeriodOfTime";
+import Amount from '../../Shared/Domain/ValueObject/Amount';
+import PeriodOfTime from '../../Shared/Domain/ValueObject/PeriodOfTime';
 
-export default class Remuneration{
+export default class Remuneration {
     private readonly _periodOfTime: PeriodOfTime;
     private readonly _amount: Amount;
 
@@ -15,23 +15,15 @@ export default class Remuneration{
         return Math.round((start - end) / 100);
     }
 
-    public get startAt() {
+    public get startAt(): number {
         return this._periodOfTime.startAt.hour;
     }
 
-    public get endAt() {
+    public get endAt(): number {
         return this._periodOfTime.endAt.hour;
     }
 
-    public get amount() {
+    public get amount(): number {
         return this._amount.value;
-    }
-
-    toPrimitives(){
-        return {
-            amount: this.amount,
-            startAt: this.startAt,
-            endAt: this.endAt
-        }
     }
 }

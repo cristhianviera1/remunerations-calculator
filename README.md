@@ -12,9 +12,10 @@ The present project uses a layered model as architecture, which allows us in thi
 
 1. Install dependencies `yarn | npm install`
 2. Compile project `yarn build | npm run build`
-3. Run project `yarn start | npm run start`
+3. Run tests `yarn test | npm run test`
+4. Run project `yarn start | npm run start`
 
-That is all! :+1:
+That is all! 👍✌🏻
 
 ## Formats
 
@@ -44,4 +45,13 @@ To add more exercises add them to the **employees-data.txt** file respecting the
 
 **INPUT:** | `GABRIEL=MO10:00-12:00,TU10:00-12:00,WE01:00-03:00,TH14:00-18:00,FR20:00-21:00,SA20:00-21:00,SU20:00-21:00`
 --- | --- |
-**OUTPUT:** | _The amount to pay to GABRIEL is: $240 USD_ 
+**OUTPUT:** | _The amount to pay to GABRIEL is: $240 USD_
+
+## Changes v1.0.0
+* The entire project was refactored to use **`DDD`** design pattern
+* Input file could be specified with the argument `--path` example `yarn start --path=./new_employees_list.txt` 
+* Can specify the name that you want to calculate remuneration with the argument `--name=` example `yarn start --name=ASTRID`
+* The pre-commit hook was added to ensure continuous integration
+* Tests are updated to handle the multiple arguments in the test, running once per row
+* Eslint and Prettier were added to keep a coding standard
+* Some methods were updated to keep a more semantic code

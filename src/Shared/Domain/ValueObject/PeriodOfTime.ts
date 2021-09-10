@@ -1,5 +1,5 @@
-import Hour from "./Hour";
-import InvalidArgumentError from "../InvalidArgumentError";
+import Hour from './Hour';
+import InvalidArgumentError from '../InvalidArgumentError';
 
 export default class PeriodOfTime {
     private readonly _startAt: Hour;
@@ -13,15 +13,15 @@ export default class PeriodOfTime {
 
     private checkEndAtIsUpperThanStartAt() {
         if(this._endAt > this._startAt){
-            throw new InvalidArgumentError(`The end Hour can't be upper than start hour`)
+            throw new InvalidArgumentError('The end Hour can\'t be upper than start hour')
         }
     }
 
-    public get startAt() {
+    public get startAt(): Hour {
         return this._startAt;
     }
 
-    public get endAt() {
+    public get endAt():Hour {
         return this._endAt;
     }
 }
